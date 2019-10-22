@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="noBoard">
+<head>
+    <title>Jobs4U - Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <!--Here is the link to the styling of the website-->
+    <link rel="stylesheet" href="indexFormat.css" />
+</head>
+<body onload="SetUp()">
+    <h1 id="topPageBar">JOBS4U</h1>
+    <div class="contentContainer">
+        <div id="logonPanel" class="contentPanel logonPanel">
+            <form class="formContainer logonPanel">
+                <h2>Log In</h2>
+
+                <label class="textBoxLabel" for="username">UserName: </label>
+                <input type="text" id="logonID" name="username" class="textBoxInput"/>
+
+                <br />
+                <label class="textBoxLabel" for="password">Password: </label>
+                <input type="password" id="logonPass" name="password" class="textBoxInput"/>
+                <br />
+
+                <button type="button" onclick="Logon()">Log on!</button>
+                <!--This is some jankish formatting to keep the show password on the right-->
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <input id="showPasswordCheckBox" type="checkbox" onclick="ShowPassword()" name="showPass" />
+                <label for="showPass">Show Password</label>
+                <div><a href="#" onclick="showPanel('newAccountPanel')" class="tinyLink">...or request an account</a></div>
+
+            </form>
+            <hr />
+
+        </div>
+        <div class="contentPanel jobsPanel" id="jobsPanel">
+            <h2 class="loggedIn">This is Our Home Page!</h2>
+            <button class="loggedIn" onclick="showPanel('newJobPanel')" type="button">Create Job Post</button>
+            <button class="loggedIn" onclick="Logout()" type="button">Logout</button>
+            <br />
+            <br />
+            <div class="left">Job Postings</div>
+            <div class="left" style="font-size:smaller">Click to send an email!</div>
+
+            <hr />
+            <div class="jobsBox" id="jobsBox">
+
+
+            </div>
+        </div>
+
+        <div id="newJobPanel" class="contentPanel newJobPanel">
+            <div class="newJobBox">
+                <form class="formContainer newJobPanel" onsubmit="CreateNewJob($('#newJobOwner').val(), $('#newJobName').val(),
+        $('#newJobLocationState').val(), $('#newJobLocationCity').val(), $('#newJobDescription').val(), $('#newJobWage').val(), $('#newJobDate').val(), 
+        $('newJobExperienceLevel').val()); return false;">
+                    <br />
+                    <br />
+                    <div class="left">Create Job</div>
+                    <hr />
+                    <div>
+                       <label class="textBoxLabel">Job Owner:</labelclass="textBoxLabel">
+                       <input class="createJobInput textBoxInput" type="text" id="newJobOwner"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Job Title:</label>
+                        <input class="createJobInput textBoxInput" type="text" id="newJobName" />
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">State:</label>
+                        <input class="createJobInput textBoxInput" type="text" id="newJobLocationState" />
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">City:</label>
+                        <input class="createJobInput textBoxInput" type="text" id="newJobLocationCity" />
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Description:</label>
+                        <input class="createJobInput textBoxInput" type="text" id="newJobDescription" />
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Job Wage:</label>
+                        <input class="createJobInput textBoxInput" type="number" id="newJobWage" />
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Date:</label>
+                        <input class="createJobInput textBoxInput" type="text" id="newJobDate" />
+                    </div>
+                    
+                    <div>
+                        <label class="textBoxLabel">Experience:</label>
+                        <select class="textBoxInput" name="experienceLevel">
+                            <option value="1">Beginner</option>
+                            <option value="2">Intermediate</option>
+                            <option value="3">Advanced</option>
+                        </select>
+                    </div>
+                    <hr />
+                    <div>
+                        <button type="submit">Create!</button>
+                    </div>
+                    <div>
+                        <button type="button" onclick="showPanel('jobsPanel')">Browse Jobs</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="contentContainer newAccountPanel">
+            <div id="newAccountPanel" class="newAccountBox contentPanel">
+                <form class="formContainer" onsubmit="CreateAccount($('#newLogonId').val(), $('#newLogonPassword').val(), $('#newLogonFName').val(),
+                $('#newLogonLName').val(), $('#newLogonPhone').val(), $('newLogonEmail').val(), $('newLogonAddress').val(), $('newLogonCity').val(),
+                $('newLogonState').val(), $('newLogonZip').val()); return false;">
+                    <div class="left">Request Account</div>
+                    <div><a href="#" onclick="showPanel('logonPanel')" class="tinyLink">...or log on</a></div>
+                    <hr />
+                    <div>
+                        <label class="textBoxLabel">Username:</label>
+                        <input type="text" id="newLogonId" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Password:</label>
+                        <input type="password" id="newLogonPassword" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">First Name:</label>
+                        <input type="text" id="newLogonFName" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Last Name:</label>
+                        <input type="text" id="newLogonLName" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Phone:</label>
+                        <input type="text" id="newLogonPhone" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Email:</label>
+                        <input type="text" id="newLogonEmail" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Address:</label>
+                        <input type="text" id="newLogonAddress" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">City:</label>
+                        <input type="text" id="newLogonCity" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">State:</label>
+                        <input type="text" id="newLogonState" class="textBoxInput"/>
+                    </div>
+                    <div>
+                        <label class="textBoxLabel">Zip:</label>
+                        <input type="text" id="newLogonZip" class="textBoxInput"/>
+                    </div>
+                    <hr />
+                    <div>
+                        <button type="submit">Go!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+
+            <!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+            <!--It's best practice to have scripts at the bottom of the page because they take time to load up (better to have everything else load first)-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="indexActions.js"></script>
+</body>
+</html>
+
